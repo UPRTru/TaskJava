@@ -56,15 +56,16 @@ public class Activity {
         String format;
         if (path.length() > 13 && ((format = path.substring(path.length() - 11)).equals("address.csv") ||
                 format.equals("address.xml"))) {
-            if (new File(path).exists()) {
+            File file;
+            if ((file = new File(path)).exists()) {
                 switch (format) {
                     case ("address.csv"):
                         fileFormat = "csv";
-                        readCSV(path);
+                        readCSV(file);
                         break;
                     case ("address.xml"):
                         fileFormat = "xml";
-                        readXML(path);
+                        readXML(file);
                         break;
                 }
                 start();
@@ -77,10 +78,10 @@ public class Activity {
     }
 
     //чтение csv файла
-    private void readCSV(String path) {
+    private void readCSV(File file) {
         try {
             Pattern pattern = Pattern.compile(";");
-            BufferedReader csvFile = new BufferedReader(new FileReader(path));
+            BufferedReader csvFile = new BufferedReader(new FileReader(file));
             List<JsonAddress> jsonAddressList = csvFile
                     .lines()
                     .skip(1)
@@ -99,10 +100,10 @@ public class Activity {
     }
 
     //чтение XML файла
-    private void readXML(String path) {
+    private void readXML(File file) {
         try {
             ObjectMapper objectMapper = new ObjectMapper();
-            BufferedReader xmlFile = new BufferedReader(new FileReader(path));
+            BufferedReader xmlFile = new BufferedReader(new FileReader(file));
             String json = XML.toJSONObject(xmlFile).getJSONObject("root").get("item").toString();
             List<JsonAddress> jsonAddressList = objectMapper.readValue(json, new TypeReference<>() {});
             addressInMap(jsonAddressList);
