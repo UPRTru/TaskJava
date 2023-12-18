@@ -1,0 +1,5 @@
+%Test Activity (errorFoundFile) - OK
+Test Activity (start) - OK
+ Test Activity (outPutCSV) - OK
+ Test Activity (outPutXML) - OK
+!Test Activity (errorInput) - OK

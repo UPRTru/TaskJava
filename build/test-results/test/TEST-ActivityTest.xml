@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="ActivityTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2023-12-18T00:41:10" hostname="DESKTOP-ERJQ146" time="1.652">
+  <properties/>
+  <testcase name="errorFoundFile()" classname="ActivityTest" time="0.149"/>
+  <testcase name="start()" classname="ActivityTest" time="0.011"/>
+  <testcase name="outPutCSV()" classname="ActivityTest" time="0.054"/>
+  <testcase name="outPutXML()" classname="ActivityTest" time="1.411"/>
+  <testcase name="errorInput()" classname="ActivityTest" time="0.01"/>
+  <system-out><![CDATA[Test Activity (errorFoundFile) - OK
+Test Activity (start) - OK
+Test Activity (outPutCSV) - OK
+Test Activity (outPutXML) - OK
+Test Activity (errorInput) - OK
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
