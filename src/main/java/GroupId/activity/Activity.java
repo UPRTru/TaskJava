@@ -8,13 +8,14 @@ import GroupId.file.JsonAddress;
 import GroupId.menu.Menu;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.MappingIterator;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.json.XML;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.dataformat.csv.CsvMapper;
+import com.fasterxml.jackson.dataformat.csv.CsvSchema;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.*;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -102,10 +103,10 @@ public class Activity {
     //чтение XML файла
     private void readXML(File file) {
         try {
-            ObjectMapper objectMapper = new ObjectMapper();
-            BufferedReader xmlFile = new BufferedReader(new FileReader(file));
-            String json = XML.toJSONObject(xmlFile).getJSONObject("root").get("item").toString();
-            List<JsonAddress> jsonAddressList = objectMapper.readValue(json, new TypeReference<>() {});
+            XmlMapper xmlMapper = new XmlMapper();
+            List<JsonAddress> jsonAddressList = xmlMapper.readValue(
+                    new String(new FileInputStream(file).readAllBytes(), "CP1251"),
+                    new TypeReference<>() {});
             addressInMap(jsonAddressList);
         } catch (Exception e) {
             throw new ErrorReadFile("Ошибка чтения файла. \nПопробуйте снова.\n");
