@@ -1,6 +1,7 @@
 import GroupId.activity.StartActivity;
 import GroupId.exception.ErrorFoundFile;
 import GroupId.exception.ErrorInPut;
+import GroupId.exception.ErrorReadFile;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,6 +19,8 @@ class ActivityTest {
     private String testOk = null;
     private final String pathCSV = "src/test/resources/testFile/address.csv"; //путь до файла address.csv
     private final String pathXML = "src/test/resources/testFile/address.xml"; //путь до файла address.xml
+    private final String pathCSV_error = "src/test/resources/testFile/error_read/address.csv";
+    private final String pathXML_error = "src/test/resources/testFile/error_read/address.xml";
 
     @BeforeEach
     public void setUp() {
@@ -47,6 +50,15 @@ class ActivityTest {
         assertThrows(ErrorFoundFile.class, () -> inPutSystem("C:\\ErrorRead\\address.xml"),
                 "Test Activity (errorFoundFile .xml) - error");
         testOk = "Test Activity (errorFoundFile) - OK";
+    }
+
+    @Test
+    void errorReadFile() {
+        assertThrows(ErrorReadFile.class, () -> inPutSystem(pathCSV_error),
+                "Test Activity (errorReadFile .csv) - error");
+        assertThrows(ErrorReadFile.class, () -> inPutSystem(pathXML_error),
+                "Test Activity (errorReadFile .xml) - error");
+        testOk = "Test Activity (errorReadFile) - OK";
     }
 
     @Test

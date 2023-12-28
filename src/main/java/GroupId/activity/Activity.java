@@ -9,16 +9,14 @@ import GroupId.menu.Menu;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.MappingIterator;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.*;
-import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 public class Activity {
     private final Menu menu;
@@ -81,19 +79,15 @@ public class Activity {
     //чтение csv файла
     private void readCSV(File file) {
         try {
-            Pattern pattern = Pattern.compile(";");
-            BufferedReader csvFile = new BufferedReader(new FileReader(file));
-            List<JsonAddress> jsonAddressList = csvFile
-                    .lines()
-                    .skip(1)
-                    .map(line -> {
-                        String[] sl = pattern.split(line);
-                        return new JsonAddress(sl[0].replaceAll("\"", ""),
-                                sl[1].replaceAll("\"", ""),
-                                Integer.parseInt(sl[2]),
-                                Integer.parseInt(sl[3]));
-                    })
-                    .collect(Collectors.toList());
+            CsvMapper csvMapper = new CsvMapper();
+            CsvSchema schema = csvMapper.schemaFor(JsonAddress.class)
+                    .sortedBy("city", "street", "house", "floor")
+                    .withColumnSeparator(';').withSkipFirstDataRow(true);
+            MappingIterator<JsonAddress> iterator = csvMapper
+                    .readerFor(JsonAddress.class)
+                    .with(schema)
+                    .readValues(new String(new FileInputStream(file).readAllBytes(), "CP1251"));
+            List<JsonAddress> jsonAddressList = iterator.readAll();
             addressInMap(jsonAddressList);
         } catch (IOException e) {
             throw new ErrorReadFile("Ошибка чтения файла. \nПопробуйте снова.\n");

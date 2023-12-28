@@ -1,8 +1,5 @@
 package GroupId.file;
 
-import java.io.UnsupportedEncodingException;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 
 public class JsonAddress {
@@ -10,7 +7,6 @@ public class JsonAddress {
     private String street;
     private int house;
     private int floor;
-    private final Charset charset = StandardCharsets.ISO_8859_1;
 
     public JsonAddress(String city, String street, int house, int floor) {
         this.city = city;

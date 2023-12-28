@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="ActivityTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2023-12-28T00:35:15" hostname="DESKTOP-ERJQ146" time="0.356">
+<testsuite name="ActivityTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2023-12-28T01:48:54" hostname="DESKTOP-ERJQ146" time="1.966">
   <properties/>
-  <testcase name="errorFoundFile()" classname="ActivityTest" time="0.044"/>
-  <testcase name="start()" classname="ActivityTest" time="0.004"/>
-  <testcase name="outPutCSV()" classname="ActivityTest" time="0.022"/>
-  <testcase name="outPutXML()" classname="ActivityTest" time="0.271"/>
-  <testcase name="errorInput()" classname="ActivityTest" time="0.006"/>
-  <system-out><![CDATA[Test Activity (errorFoundFile) - OK
+  <testcase name="errorReadFile()" classname="ActivityTest" time="1.843"/>
+  <testcase name="errorFoundFile()" classname="ActivityTest" time="0.018"/>
+  <testcase name="start()" classname="ActivityTest" time="0.01"/>
+  <testcase name="outPutCSV()" classname="ActivityTest" time="0.032"/>
+  <testcase name="outPutXML()" classname="ActivityTest" time="0.017"/>
+  <testcase name="errorInput()" classname="ActivityTest" time="0.018"/>
+  <system-out><![CDATA[Test Activity (errorReadFile) - OK
+Test Activity (errorFoundFile) - OK
 Test Activity (start) - OK
 Test Activity (outPutCSV) - OK
 Test Activity (outPutXML) - OK
